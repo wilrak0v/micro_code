@@ -1,3 +1,6 @@
 *.swp
 *.bin
 *.elf
+src/*.swp
+src/*.bin
+src/*.elf
