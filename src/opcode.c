@@ -64,6 +64,19 @@ void execute_dup(Mc *mc)
 }
 
 
+/* Registers Functions */
+void execute_loadr(Mc *mc)
+{
+    // regs[arg] = value
+    int8_t register_number = mc->flash[mc->pc++];
+    int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    mc->regs[register_number] = value;
+    printf("Register number : %d | Value : %d\n", register_number, value);
+    printf("REGS : %d | %d | %d | %d\n", mc->regs[0], mc->regs[1], mc->regs[2], mc->regs[3]);
+}
+
+
 /* Logic and Jump Functions */
 void execute_jmp(Mc *mc)
 {

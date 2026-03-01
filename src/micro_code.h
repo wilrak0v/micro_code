@@ -20,6 +20,8 @@ typedef enum {
     OP_OVER  = 0x13, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
     OP_DUP   = 0x14, // Duplique la dernière valeur
 
+    OP_LOADR = 0x0A,
+
     OP_DELAY = 0x20, // Mets en pause le programme x ms
 
     OP_JMP   = 0x30,

@@ -22,5 +22,6 @@ int main()
     }
 
     free_mc(&mc);
+    printf("\n=== Fin du programme ===\n");
     return 0;
 }

@@ -124,6 +124,10 @@ int execute_mc(Mc *mc)
         case OP_DUP:
             execute_dup(mc);
             break;
+            
+        case OP_LOADR:
+            execute_loadr(mc);
+            break;
 
         case OP_DELAY:
             usleep(1000 * mc->stack[mc->sp]);

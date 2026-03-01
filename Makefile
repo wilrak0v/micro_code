@@ -1,6 +1,6 @@
 # --- Configuration ---
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11 -Iinclude
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 TARGET = mc 
 
 # --- Répertoires ---

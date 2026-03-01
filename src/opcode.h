@@ -14,6 +14,8 @@ void execute_swap(Mc *mc);
 void execute_over(Mc *mc);
 void execute_dup(Mc *mc);
 
+void execute_loadr(Mc *mc);
+
 void execute_delay(Mc *mc);
 
 void execute_jmp(Mc *mc);
