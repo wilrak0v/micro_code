@@ -95,43 +95,29 @@ int execute_mc(Mc *mc)
             execute_add(mc);
             break;
         case OP_SUB:
-            mc->stack[mc->sp-1] = mc->stack[mc->sp-1] - mc->stack[mc->sp];
-            mc->stack[mc->sp] = 0;
-            mc->sp--;
+            execute_sub(mc);
             break;
         case OP_MUL:
-            mc->stack[mc->sp-1] = mc->stack[mc->sp-1] * mc->stack[mc->sp];
-            mc->stack[mc->sp] = 0;
-            mc->sp--;
+            execute_mul(mc);
             break;
         case OP_DIV:
-            mc->stack[mc->sp-1] = mc->stack[mc->sp-1] / mc->stack[mc->sp];
-            mc->stack[mc->sp] = 0;
-            mc->sp--;
+            execute_div(mc);
             break;
 
         case OP_PUSH:
-            mc->stack[++mc->sp] = *(int32_t*)(&mc->flash[mc->pc]);
-            mc->pc += 4;
+            execute_push(mc);
             break;
         case OP_DROP:
-            mc->stack[mc->sp] = 0;
-            mc->sp--;
+            execute_drop(mc);
             break;
         case OP_SWAP:
-        {
-            int32_t temp = mc->stack[mc->sp];
-            mc->stack[mc->sp] = mc->stack[mc->sp-1];
-            mc->stack[mc->sp-1] = temp;
+            execute_swap(mc);
             break;
-        }
         case OP_OVER:
-            mc->stack[mc->sp + 1] = mc->stack[mc->sp - 1];
-            mc->sp++;
+            execute_over(mc);
             break;
         case OP_DUP:
-            mc->stack[mc->sp + 1] = mc->stack[mc->sp];
-            mc->sp++;
+            execute_dup(mc);
             break;
 
         case OP_DELAY:
@@ -139,43 +125,22 @@ int execute_mc(Mc *mc)
             break;
 
         case OP_JMP:
-        {
-            int32_t target = *(int32_t*)(&mc->flash[mc->pc]);
-            mc->pc = target; 
+            execute_jmp(mc);
         	break;
-        }       
         case OP_JZ:
-        {
-            int32_t target = *(int32_t*)(&mc->flash[mc->pc]);
-            mc->pc += 4; 
-            if (mc->stack[mc->sp] == 0) {
-            	mc->pc = target;
-            }
-            mc->stack[mc->sp--] = 0; 
+            execute_jz(mc); 
         	break;
-        }
         case OP_JNZ:
-        {
-            int32_t target = *(int32_t*)(&mc->flash[mc->pc]);
-            mc->pc += 4; 
-            if (mc->stack[mc->sp] > 0) {
-                printf("DEBUG: Jump to %d (Value was %d)\n", target, mc->stack[mc->sp]);
-            	mc->pc = target;
-            }
-            mc->stack[mc->sp--] = 0;
-        	break;
-        }
+            execute_jnz(mc);
+            break;
         case OP_EQ:
-            mc->stack[mc->sp - 1] = mc->stack[mc->sp - 1] == mc->stack[mc->sp];
-            mc->stack[mc->sp--] = 0;
+            execute_eq(mc);
             break;
         case OP_LT:
-            mc->stack[mc->sp - 1] = mc->stack[mc->sp - 1] > mc->stack[mc->sp];
-            mc->stack[mc->sp--] = 0;
+            execute_lt(mc);
             break;
         case OP_GT:
-            mc->stack[mc->sp - 1] = mc->stack[mc->sp - 1] < mc->stack[mc->sp];
-            mc->stack[mc->sp--] = 0;
+            execute_gt(mc);
             break;
 
         case OP_STORE:
