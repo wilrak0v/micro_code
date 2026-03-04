@@ -4,3 +4,4 @@
 src/*.swp
 src/*.bin
 src/*.elf
+obj/

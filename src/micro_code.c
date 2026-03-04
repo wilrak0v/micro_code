@@ -57,7 +57,7 @@ int new_mc(Mc *mc, const char *path)
 
     mc->ram = malloc(mc->ram_size * sizeof(int32_t));
 
-    mc->flash_size = get_file_size(f) - 3;
+    mc->flash_size = get_file_size(f) - 7;
     mc->flash = malloc(mc->flash_size * sizeof(uint8_t));
     load_into_flash(f, mc);
 

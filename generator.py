@@ -22,7 +22,7 @@ instructions2 = [
 with open("test.bin", "wb") as f:
     f.write(bytes(instructions1))
 
-with open("test2.bin", "wb") as f:
-    f.write(bytes(instructions2))
+#with open("test2.bin", "wb") as f:
+#    f.write(bytes(instructions2))
 
-print("Fichier test.bin et test2.bin générés !")
+print("Fichier(s) de tests binaires générés !")
