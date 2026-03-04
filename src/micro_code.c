@@ -64,9 +64,14 @@ int new_mc(Mc *mc, const char *path)
     mc->stack = malloc(mc->stack_size * sizeof(int32_t));
     mc->pc = 0;
     mc->sp = -1;
+    mc->regs[0] = 0;
+    mc->regs[1] = 0;
+    mc->regs[2] = 0;
+    mc->regs[3] = 0;
 
     printf("New MicroCode VM created!\n");
     printf("Size of stack : %d | Size of RAM : %d | Graphic mode : %d | Size of flash : %d\n\n", mc->stack_size, mc->ram_size, mc->gmode, mc->flash_size);
+    printf("Size of the VM : %lu\n", sizeof(*mc));
 
     if (fclose(f) != 0)
     {
@@ -128,7 +133,7 @@ int execute_mc(Mc *mc)
             execute_jmp(mc);
         	break;
         case OP_JZ:
-            execute_jz(mc); 
+            execute_jz(mc);
         	break;
         case OP_JNZ:
             execute_jnz(mc);

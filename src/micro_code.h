@@ -19,9 +19,9 @@ typedef enum {
     OP_SWAP  = 0x12, // Inverse les deux premiers (ex : [a, b] -> [b, a])
     OP_OVER  = 0x13, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
     OP_DUP   = 0x14, // Duplique la dernière valeur
-    
+
     OP_DELAY = 0x20, // Mets en pause le programme x ms
-    
+
     OP_JMP   = 0x30,
     OP_JZ    = 0x31,
     OP_JNZ   = 0x32,
@@ -46,6 +46,7 @@ typedef struct {
     int32_t *stack;
     int32_t *ram;
     int32_t sp;
+    int32_t regs[4];
 } Mc;
 
 int new_mc(Mc *mc, const char *path);
