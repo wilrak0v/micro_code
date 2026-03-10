@@ -15,34 +15,46 @@ typedef enum {
     OP_MUL     = 0x03,
     OP_DIV     = 0x04,
     OP_MOD     = 0x05,
+    OP_INC     = 0x06,
+    OP_DEC     = 0x07,
 
-    OP_PUSH    = 0x06,
-    OP_DROP    = 0x07,
-    OP_SWAP    = 0x08, // Inverse les deux premiers (ex : [a, b] -> [b, a])
-    OP_OVER    = 0x09, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
-    OP_DUP     = 0x0A, // Duplique la dernière valeur
+    OP_PUSH    = 0x08,
+    OP_DROP    = 0x09,
+    OP_SWAP    = 0x0A, // Inverse les deux premiers (ex : [a, b] -> [b, a])
+    OP_OVER    = 0x0B, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
+    OP_DUP     = 0x0C, // Duplique la dernière valeur
 
 
-    OP_JMP     = 0x0B,
-    OP_JZ      = 0x0C,
-    OP_JNZ     = 0x0D,
-    OP_EQ      = 0x0E,
-    OP_LT      = 0x0F,
-    OP_GT      = 0x10,
+    OP_JMP     = 0x0D,
+    OP_JZ      = 0x0E,
+    OP_JNZ     = 0x0F,
+    OP_EQ      = 0x10,
+    OP_LT      = 0x11,
+    OP_GT      = 0x12,
 
-    OP_STORE   = 0x11,
-    OP_LOAD    = 0x12,
+    OP_STORE   = 0x13,
+    OP_LOAD    = 0x14,
 
-    OP_MOVR    = 0x65,
+    OP_DELAY   = 0x15,
+    OP_PRINT   = 0x16,
+    OP_PUTC    = 0x17,
 
-    OP_DELAY   = 0x13,
-    OP_PRINT   = 0x14,
-    OP_PUTC    = 0x15,
+    OP_INCLUDE = 0x18,
+    OP_FN      = 0x19,
+    OP_RET     = 0x1A,
+    OP_CALL    = 0x1B,
 
-    OP_INCLUDE = 0x16,
-    OP_FN      = 0x17,
-    OP_RET     = 0x18,
-    OP_CALL    = 0x19,
+    OP_MOVV    = 0x1C,
+    OP_MOVR    = 0x1D,
+    OP_MOVS    = 0x1E,
+    OP_STORER  = 0x1F,
+    OP_LOADR   = 0x20,
+    OP_ADDR    = 0x21,
+    OP_SUBR    = 0x22,
+    OP_MULR    = 0x23,
+    OP_DIVR    = 0x24,
+    OP_INCR    = 0x25,
+    OP_DECR    = 0x26,
 } OpCode;
 
 typedef struct {
