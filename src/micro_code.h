@@ -47,14 +47,15 @@ typedef enum {
     OP_MOVV    = 0x1C,
     OP_MOVR    = 0x1D,
     OP_MOVS    = 0x1E,
-    OP_STORER  = 0x1F,
-    OP_LOADR   = 0x20,
-    OP_ADDR    = 0x21,
-    OP_SUBR    = 0x22,
-    OP_MULR    = 0x23,
-    OP_DIVR    = 0x24,
-    OP_INCR    = 0x25,
-    OP_DECR    = 0x26,
+    OP_MOVRS   = 0x1F,
+    OP_STORER  = 0x20,
+    OP_LOADR   = 0x21,
+    OP_ADDR    = 0x22,
+    OP_SUBR    = 0x23,
+    OP_MULR    = 0x24,
+    OP_DIVR    = 0x25,
+    OP_INCR    = 0x26,
+    OP_DECR    = 0x27,
 } OpCode;
 
 typedef struct {

@@ -161,8 +161,8 @@ int execute_mc(Mc *mc)
         case OP_STORE:
             execute_store(mc);
             break;
-        case OP_MOVR:
-            execute_movv(mc);
+        case OP_LOAD:
+            execute_load(mc);
             break;
 
         case OP_PRINT:
@@ -179,13 +179,48 @@ int execute_mc(Mc *mc)
         case OP_FN:
             execute_fn(mc);
             break;
-
         case OP_RET:
             execute_ret(mc);
             break;
-
         case OP_CALL:
             execute_call(mc);
+            break;
+
+        case OP_MOVV:
+            execute_movv(mc);
+            break;
+        case OP_MOVR:
+            execute_movr(mc);
+            break;
+        case OP_MOVS:
+            execute_movs(mc);
+            break; 
+        case OP_MOVRS:
+            execute_movrs(mc);
+            break;
+        case OP_STORER:
+            execute_storer(mc);
+            break;
+        case OP_LOADR:
+            execute_loadr(mc);
+            break;
+        case OP_ADDR:
+            execute_addr(mc);
+            break;
+        case OP_SUBR:
+            execute_subr(mc);
+            break;
+        case OP_MULR:
+            execute_mulr(mc);
+            break;
+        case OP_DIVR:
+            execute_divr(mc);
+            break;
+        case OP_INCR:
+            execute_incr(mc);
+            break;
+        case OP_DECR:
+            execute_decr(mc);
             break;
 
         default:
