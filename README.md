@@ -1,6 +1,8 @@
 # Micro Code
 Micro Code est bytecode basé sur une pile personnalisé écrit en C.
 
+TODO: créer un système modulaire pour pouvoir ajouter des syscalls.
+
 | Instruction | OpCode | Signification |
 |-------------|--------|---------------|
 | HALT        | 0x00   | Stop le prog
@@ -15,6 +17,8 @@ Micro Code est bytecode basé sur une pile personnalisé écrit en C.
 | SWAP        | 0x12   | Swap les deux dernières valeurs 
 | OVER        | 0x13   | Push l'avant dernière valeur
 | DUP         | 0x14   | Duplique la dernière valeur
+|             |        |
+| LOADR       | 0x0A   | Mets la valeur x dans regs[number]
 |             |        |
 | DELAY       | 0x20   | Fait un delay de x ms présent sur la pile
 |             |        |
