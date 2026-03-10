@@ -28,8 +28,6 @@ void execute_gt(Mc *mc);
 void execute_store(Mc *mc);
 void execute_load(Mc *mc);
 
-void execute_movv(Mc *mc);      // Mov value
-
 void execute_print(Mc *mc);
 void execute_putc(Mc *mc);
 
@@ -38,5 +36,17 @@ void execute_include(Mc *mc);
 void execute_fn(Mc *mc);
 void execute_ret(Mc *mc);
 void execute_call(Mc *mc);
+
+void execute_movv(Mc *mc);
+void execute_movr(Mc *mc);
+void execute_movs(Mc *mc);
+void execute_storer(Mc *mc);
+void execute_loadr(Mc *mc);
+void execute_addr(Mc *mc);
+void execute_subr(Mc *mc);
+void execute_mulr(Mc *mc);
+void execute_subr(Mc *mc);
+void execute_incr(Mc *mc);
+void execute_decr(Mc *mc);
 
 #endif
