@@ -32,4 +32,6 @@ void execute_movv(Mc *mc);      // Mov value
 void execute_print(Mc *mc);
 void execute_putc(Mc *mc);
 
+void execute_include(Mc *mc);
+
 #endif

@@ -156,3 +156,17 @@ void execute_putc(Mc *mc)
 {
     putchar((char)mc->stack[mc->sp]);
 }
+
+
+/* Include Function */
+void execute_include(Mc *mc)
+{
+    // 1. Get the filename
+    char fn[16];
+    int i = 0;
+    while (mc->flash[mc->pc] != 0x00)
+        fn[i++] = mc->flash[mc->pc++];
+    fn[i] = '\0';
+    // 2. Printf the filename
+    printf("Include '%s' at pos %d", fn, mc->pc);
+}

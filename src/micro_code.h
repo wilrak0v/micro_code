@@ -5,38 +5,41 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <unistd.h>
+#include <wchar.h>
 
 typedef enum {
-    OP_HALT  = 0x00,
+    OP_HALT    = 0x00,
 
-    OP_ADD   = 0x01,
-    OP_SUB   = 0x02,
-    OP_MUL   = 0x03,
-    OP_DIV   = 0x04,
-    OP_MOD   = 0x05,
+    OP_ADD     = 0x01,
+    OP_SUB     = 0x02,
+    OP_MUL     = 0x03,
+    OP_DIV     = 0x04,
+    OP_MOD     = 0x05,
 
-    OP_PUSH  = 0x06,
-    OP_DROP  = 0x07,
-    OP_SWAP  = 0x08, // Inverse les deux premiers (ex : [a, b] -> [b, a])
-    OP_OVER  = 0x09, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
-    OP_DUP   = 0x0A, // Duplique la dernière valeur
+    OP_PUSH    = 0x06,
+    OP_DROP    = 0x07,
+    OP_SWAP    = 0x08, // Inverse les deux premiers (ex : [a, b] -> [b, a])
+    OP_OVER    = 0x09, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
+    OP_DUP     = 0x0A, // Duplique la dernière valeur
 
 
-    OP_JMP   = 0x0B,
-    OP_JZ    = 0x0C,
-    OP_JNZ   = 0x0D,
-    OP_EQ    = 0x0E,
-    OP_LT    = 0x0F,
-    OP_GT    = 0x10,
+    OP_JMP     = 0x0B,
+    OP_JZ      = 0x0C,
+    OP_JNZ     = 0x0D,
+    OP_EQ      = 0x0E,
+    OP_LT      = 0x0F,
+    OP_GT      = 0x10,
 
-    OP_STORE = 0x11,
-    OP_LOAD  = 0x12,
+    OP_STORE   = 0x11,
+    OP_LOAD    = 0x12,
 
-    OP_MOVR = 0x65,
+    OP_MOVR    = 0x65,
 
-    OP_DELAY = 0x13,
-    OP_PRINT = 0x14,
-    OP_PUTC  = 0x15,
+    OP_DELAY   = 0x13,
+    OP_PRINT   = 0x14,
+    OP_PUTC    = 0x15,
+
+    OP_INCLUDE = 0x16,
 } OpCode;
 
 typedef struct {
