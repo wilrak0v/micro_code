@@ -135,22 +135,6 @@ void execute_load(Mc *mc)
 }
 
 
-/* Registers Functions */
-void execute_movv(Mc *mc)
-{
-    // regs[arg] = value
-    int8_t register_number = mc->flash[mc->pc++];
-    int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
-    mc->pc += 4;
-    if (register_number == 4) mc->sp = value;
-    else if (register_number == 5) mc-> sp = value;
-    else if (register_number < 4) mc->regs[register_number] = value;
-    else return;
-    printf("Register number : %d | Value : %d\n", register_number, value);
-    printf("REGS : %d | %d | %d | %d\n", mc->regs[0], mc->regs[1], mc->regs[2], mc->regs[3]);
-}
-
-
 /* Display and Events Functions */
 void execute_print(Mc *mc)
 {
@@ -200,7 +184,7 @@ void execute_fn(Mc *mc)
     uint32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
     mc->pc += 4;
     printf("(McFunction) hash: %d ; addr: %d\n", hash, mc->pc);
-    push_lt(mc, (McFunction){hash, mc->pc});
+    push_lt(mc, (McFunction) { hash, mc->pc });
     while(mc->flash[mc->pc++] != OP_RET);
 }
 
@@ -230,4 +214,102 @@ void execute_call(Mc *mc)
             break;
         }
     }
+}
+
+
+/* Registers Functions */
+int32_t *get_regs(Mc *mc)
+{
+    if (mc->flash[mc->pc] == 4) return (int32_t*) &mc->sp;
+    else if (mc->flash[mc->pc] == 5) return (int32_t*) &mc->pc;
+    return (int32_t*) &mc->regs[mc->flash[mc->pc]];
+}
+void execute_movv(Mc *mc)
+{
+    int32_t *regs = get_regs(mc);
+    mc->pc++;
+    int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    *regs = value;
+}
+void execute_movr(Mc *mc) 
+{
+    int32_t *reg1 = get_regs(mc);
+    mc->pc++;
+    int32_t *reg2 = get_regs(mc);
+    mc->pc++;
+    *reg1 = *reg2;
+}
+void execute_movs(Mc *mc)
+{
+    int32_t *reg = get_regs(mc); 
+    mc->pc++;
+    *reg = mc->stack[mc->sp];
+    mc->stack[mc->sp--] = 0;
+}
+void execute_movrs(Mc *mc)
+{
+    int32_t *reg = get_regs(mc);
+    mc->pc++;
+    mc->stack[++mc->sp] = *reg;
+}
+void execute_storer(Mc *mc)
+{
+    int32_t *reg = get_regs(mc);
+    mc->pc++;
+    int32_t addr = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    if (mc->ram_size < addr || 0 > addr) return;
+    mc->ram[addr] = *reg;
+}
+void execute_loadr(Mc *mc)
+{
+    int32_t *reg = get_regs(mc);
+    mc->pc++;
+    int32_t addr = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    if (mc->ram_size < addr || 0 > addr) return;
+    *reg = mc->ram[addr];
+}
+void execute_addr(Mc *mc)
+{
+    int32_t *reg1 = get_regs(mc);
+    mc->pc++;
+    int32_t *reg2 = get_regs(mc);
+    mc->pc++;
+    *reg1 += *reg2;
+}
+void execute_subr(Mc *mc)
+{
+    int32_t *reg1 = get_regs(mc);
+    mc->pc++;
+    int32_t *reg2 = get_regs(mc);
+    mc->pc++;
+    *reg1 -= *reg2;
+}
+void execute_mulr(Mc *mc)
+{
+    int32_t *reg1 = get_regs(mc);
+    mc->pc++;
+    int32_t *reg2 = get_regs(mc);
+    mc->pc++;
+    *reg1 *= *reg2;
+}
+void execute_divr(Mc *mc)
+{
+    int32_t *reg1 = get_regs(mc);
+    mc->pc++;
+    int32_t *reg2 = get_regs(mc);
+    mc->pc++;
+    *reg1 /= *reg2;
+}
+void execute_incr(Mc *mc)
+{
+    int32_t *reg = get_regs(mc);
+    *reg = *reg + 1;
+}
+void execute_decr(Mc *mc)
+{
+    int32_t *reg = get_regs(mc);
+    *reg = *reg - 1;
 }
