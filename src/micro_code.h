@@ -13,29 +13,30 @@ typedef enum {
     OP_SUB   = 0x02,
     OP_MUL   = 0x03,
     OP_DIV   = 0x04,
+    OP_MOD   = 0x05,
 
-    OP_PUSH  = 0x10,
-    OP_DROP  = 0x11,
-    OP_SWAP  = 0x12, // Inverse les deux premiers (ex : [a, b] -> [b, a])
-    OP_OVER  = 0x13, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
-    OP_DUP   = 0x14, // Duplique la dernière valeur
+    OP_PUSH  = 0x06,
+    OP_DROP  = 0x07,
+    OP_SWAP  = 0x08, // Inverse les deux premiers (ex : [a, b] -> [b, a])
+    OP_OVER  = 0x09, // Copie le second élément au sommet (ex : [a, b] -> [a, b, a])
+    OP_DUP   = 0x0A, // Duplique la dernière valeur
 
-    OP_LOADR = 0x0A,
 
-    OP_DELAY = 0x20, // Mets en pause le programme x ms
+    OP_JMP   = 0x0B,
+    OP_JZ    = 0x0C,
+    OP_JNZ   = 0x0D,
+    OP_EQ    = 0x0E,
+    OP_LT    = 0x0F,
+    OP_GT    = 0x10,
 
-    OP_JMP   = 0x30,
-    OP_JZ    = 0x31,
-    OP_JNZ   = 0x32,
-    OP_EQ    = 0x33,
-    OP_LT    = 0x34,
-    OP_GT    = 0x35,
+    OP_STORE = 0x11,
+    OP_LOAD  = 0x12,
 
-    OP_STORE = 0x40,
-    OP_LOAD  = 0x41,
+    OP_MOVR = 0x65,
 
-    OP_PRINT = 0x50,
-    OP_PUTC  = 0x51,
+    OP_DELAY = 0x13,
+    OP_PRINT = 0x14,
+    OP_PUTC  = 0x15,
 } OpCode;
 
 typedef struct {

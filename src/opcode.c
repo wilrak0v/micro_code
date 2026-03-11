@@ -64,17 +64,7 @@ void execute_dup(Mc *mc)
 }
 
 
-/* Registers Functions */
-void execute_loadr(Mc *mc)
-{
-    // regs[arg] = value
-    int8_t register_number = mc->flash[mc->pc++];
-    int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
-    mc->pc += 4;
-    mc->regs[register_number] = value;
-    printf("Register number : %d | Value : %d\n", register_number, value);
-    printf("REGS : %d | %d | %d | %d\n", mc->regs[0], mc->regs[1], mc->regs[2], mc->regs[3]);
-}
+
 
 
 /* Logic and Jump Functions */
@@ -87,7 +77,7 @@ void execute_jmp(Mc *mc)
 void execute_jz(Mc *mc)
 {
     int32_t target = *(int32_t*)(&mc->flash[mc->pc]);
-    mc->pc += 4; 
+    mc->pc += 4;
     if (mc->stack[mc->sp] == 0) {
    	    mc->pc = target;
     }
@@ -97,7 +87,7 @@ void execute_jz(Mc *mc)
 void execute_jnz(Mc *mc)
 {
     int32_t target = *(int32_t*)(&mc->flash[mc->pc]);
-    mc->pc += 4; 
+    mc->pc += 4;
     if (mc->stack[mc->sp] > 0) {
         printf("DEBUG: Jump to %d (Value was %d)\n", target, mc->stack[mc->sp]);
         mc->pc = target;
@@ -140,6 +130,19 @@ void execute_load(Mc *mc)
     mc->pc += 4;
     if (mc->ram_size < addr || 0 > addr) return;
     mc->stack[++mc->sp] = mc->ram[addr];
+}
+
+
+/* Registers Functions */
+void execute_movv(Mc *mc)
+{
+    // regs[arg] = value
+    int8_t register_number = mc->flash[mc->pc++];
+    int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    mc->regs[register_number] = value;
+    printf("Register number : %d | Value : %d\n", register_number, value);
+    printf("REGS : %d | %d | %d | %d\n", mc->regs[0], mc->regs[1], mc->regs[2], mc->regs[3]);
 }
 
 

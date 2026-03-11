@@ -125,10 +125,6 @@ int execute_mc(Mc *mc)
             execute_dup(mc);
             break;
 
-        case OP_LOADR:
-            execute_loadr(mc);
-            break;
-
         case OP_DELAY:
             usleep(1000 * mc->stack[mc->sp]);
             break;
@@ -155,8 +151,8 @@ int execute_mc(Mc *mc)
         case OP_STORE:
             execute_store(mc);
             break;
-        case OP_LOAD:
-            execute_load(mc);
+        case OP_MOVR:
+            execute_movv(mc);
             break;
 
         case OP_PRINT:
