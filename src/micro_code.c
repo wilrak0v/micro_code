@@ -21,7 +21,7 @@ void load_into_flash(FILE *f, Mc *mc)
     }
 }
 
-void get_header(FILE *f, uint16_t *flash_size, uint16_t *ram_size, uint8_t *gmode)
+void get_header(FILE *f, uint16_t *stack_size, uint16_t *ram_size, uint8_t *gmode)
 {
     char magic_number[2];
     fseek(f, 0, SEEK_SET);
@@ -30,7 +30,7 @@ void get_header(FILE *f, uint16_t *flash_size, uint16_t *ram_size, uint8_t *gmod
         perror("Error when getting magic number");
         return;
     }
-    if (fread(flash_size, sizeof(uint16_t), 1, f) != 1)
+    if (fread(stack_size, sizeof(uint16_t), 1, f) != 1)
     {
         perror("Error when getting the size of the stack");
         return;
@@ -124,7 +124,7 @@ int execute_mc(Mc *mc)
         case OP_DUP:
             execute_dup(mc);
             break;
-            
+
         case OP_LOADR:
             execute_loadr(mc);
             break;
