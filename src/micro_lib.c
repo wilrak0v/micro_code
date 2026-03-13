@@ -22,6 +22,6 @@ void get_lib(FILE *f, Mc *mc)
         }
         content_size++;
         // READ the addr and add it into linked table
-        push_lt(mc, current_fn_addr);
+        push_lt(mc, mc->flash_size + current_fn_addr);
     }
 }
