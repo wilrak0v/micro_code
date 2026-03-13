@@ -1,4 +1,5 @@
 #include "opcode.h"
+#include "micro_lib.h"
 
 /* Arithmetic Functions */
 void execute_add(Mc *mc)
@@ -169,4 +170,23 @@ void execute_include(Mc *mc)
     fn[i] = '\0';
     // 2. Printf the filename
     printf("Include '%s' at pos %d", fn, mc->pc);
+    // 3. Open file
+    FILE *fp = fopen(fn, "rb");
+    if (fp == NULL)
+    {
+        char buf[25 + 16];
+        snprintf(buf, sizeof(buf), "Error when opening lib '%s'", fn);
+        perror(buf);
+        return;
+    }
+
+    get_lib(fp, mc);
+
+    if(fclose(fp) != 0)
+    {
+        char buf[25 + 16];
+        snprintf(buf, sizeof(buf), "Error when closing lib '%s'", fn);
+        perror(buf);
+        return;
+    }
 }

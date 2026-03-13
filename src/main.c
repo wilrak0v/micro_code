@@ -13,7 +13,7 @@ void draw_stack(Mc mc)
 int main()
 {
     Mc mc;
-    new_mc(&mc, "test.bin");
+    new_mc(&mc, "test.mc");
     while (1)
     {
         if (execute_mc(&mc))

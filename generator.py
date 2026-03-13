@@ -10,20 +10,31 @@ instructions1 = [
     0x74,
     0x2E,
     0x6D,
+    0x63,
     0x6C,
     0x00,
 ]
 instructions2 = [
-    0x01,
+    0x4D,
+    0x4C,
+    0x10,
     0x00,
     0x00,
-    0x03,
+    0x00,
+    0xFF,
+    0x00,
+    0xFF,
+    0x00,
+    0xFF,
+    0xFF,
+    0xFF,
+    0xFF,
 ]
 
-with open("test.bin", "wb") as f:
+with open("test.mc", "wb") as f:
     f.write(bytes(instructions1))
 
-# with open("test2.bin", "wb") as f:
-#    f.write(bytes(instructions2))
+with open("t.mcl", "wb") as f:
+    f.write(bytes(instructions2))
 
 print("Fichier(s) de tests binaires générés !")

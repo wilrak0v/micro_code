@@ -1,7 +1,7 @@
 # --- Configuration ---
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iinclude
-TARGET = mc 
+TARGET = mc
 
 # --- Répertoires ---
 SRC_DIR = src
@@ -36,7 +36,7 @@ $(OBJ_DIR):
 
 # Nettoyage
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET) *.bin
+	rm -rf $(OBJ_DIR) $(TARGET) *.bin *.mcl *.mc
 	@echo "C'est nettoyé."
 
 .PHONY: all clean

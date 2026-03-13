@@ -2,6 +2,7 @@
 #define OPCODE_H
 
 #include "micro_code.h"
+#include "micro_lib.h"
 
 void execute_add(Mc *mc);
 void execute_sub(Mc *mc);
