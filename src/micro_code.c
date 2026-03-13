@@ -176,6 +176,10 @@ int execute_mc(Mc *mc)
             execute_include(mc);
             break;
 
+        case OP_FN:
+            execute_fn(mc);
+            break;
+
         default:
             printf("Error: unknow opcode %d at pos %d\n", opcode, mc->pc);
             return 1;

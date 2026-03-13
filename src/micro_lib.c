@@ -13,18 +13,6 @@ void get_lib(FILE *f, Mc *mc)
         return;
     }
 
-    uint32_t current_fn_addr;
-    int content_size = 0;
-    while (fread(&current_fn_addr, sizeof(current_fn_addr), 1, f) == 1)
-    {
-        if (current_fn_addr == 0xFFFFFFFF)
-        {
-            break;
-        }
-        content_size++;
-        // READ the addr and add it into linked table
-        push_lt(mc, mc->flash_size + current_fn_addr);
-    }
     size_t start_pos = ftell(f);
     fseek(f, 0, SEEK_END);
     size_t lib_size = ftell(f) - start_pos; // Plus rapide que la boucle getc

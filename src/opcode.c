@@ -188,3 +188,13 @@ void execute_include(Mc *mc)
         return;
     }
 }
+
+void execute_fn(Mc *mc)
+{
+    // Mettre adresse dans linked table
+    push_lt(mc, mc->pc);
+    while(mc->flash[mc->pc] != OP_RET)
+    {
+        printf("%d ; ", mc->flash[mc->pc++]);
+    }
+}

@@ -35,4 +35,6 @@ void execute_putc(Mc *mc);
 
 void execute_include(Mc *mc);
 
+void execute_fn(Mc *mc);
+
 #endif
