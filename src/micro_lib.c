@@ -1,4 +1,5 @@
 #include "micro_lib.h"
+#include "micro_code.h"
 
 void get_lib(FILE *f, Mc *mc)
 {
@@ -21,6 +22,6 @@ void get_lib(FILE *f, Mc *mc)
         }
         content_size++;
         // READ the addr and add it into linked table
-        printf("Fn '%d' at addr '%d'\n", content_size, current_fn_addr);
+        push_lt(mc, current_fn_addr);
     }
 }

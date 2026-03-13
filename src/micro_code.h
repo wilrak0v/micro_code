@@ -49,14 +49,18 @@ typedef struct {
     uint16_t stack_size;
     uint16_t flash_size;
     uint16_t ram_size;
+    uint16_t lt_size;       // linked table size
+    uint16_t lt_capacity;   // linked table capacity
     int32_t *stack;
     int32_t *ram;
+    uint32_t *linked_table;
     int32_t sp;
     int32_t regs[4];
 } Mc;
 
 int new_mc(Mc *mc, const char *path);
 int execute_mc(Mc *mc);
+void push_lt(Mc *mc, uint32_t value);
 void free_mc(Mc *mc);
 
 #endif

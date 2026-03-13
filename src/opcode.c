@@ -168,9 +168,7 @@ void execute_include(Mc *mc)
     while (mc->flash[mc->pc] != 0x00)
         fn[i++] = mc->flash[mc->pc++];
     fn[i] = '\0';
-    // 2. Printf the filename
-    printf("Include '%s' at pos %d", fn, mc->pc);
-    // 3. Open file
+
     FILE *fp = fopen(fn, "rb");
     if (fp == NULL)
     {

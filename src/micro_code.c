@@ -69,6 +69,16 @@ int new_mc(Mc *mc, const char *path)
     mc->regs[2] = 0;
     mc->regs[3] = 0;
 
+    mc->lt_capacity = 10;
+    mc->linked_table = malloc(sizeof(uint32_t) * mc->lt_capacity);
+    mc->lt_size = 0;
+
+    if (!mc->ram || !mc->flash || !mc->stack || !mc->linked_table) {
+        fprintf(stderr, "Fatal: Memory allocation failed\n");
+        fclose(f);
+        return -2;
+    }
+
     printf("New MicroCode VM created!\n");
     printf("Size of stack : %d | Size of RAM : %d | Graphic mode : %d | Size of flash : %d\n\n", mc->stack_size, mc->ram_size, mc->gmode, mc->flash_size);
     printf("Size of the VM : %lu\n", sizeof(*mc));
@@ -173,12 +183,24 @@ int execute_mc(Mc *mc)
     return 0;
 }
 
+void push_lt(Mc *mc, uint32_t value)
+{
+    if (mc->lt_size == mc->lt_capacity)
+    {
+        mc->lt_capacity *= 2;
+        mc->linked_table = realloc(mc->linked_table, mc->lt_capacity * sizeof(uint32_t));
+    }
+    mc->linked_table[mc->lt_size++] = value;
+}
+
 void free_mc(Mc *mc)
 {
     free(mc->flash);
     free(mc->stack);
     free(mc->ram);
+    free(mc->linked_table);
     mc->ram = NULL;
     mc->flash = NULL;
     mc->stack = NULL;
+    mc->linked_table = NULL;
 }
