@@ -39,7 +39,7 @@ void get_lib(FILE *f, Mc *mc)
     }
 
     mc->flash = temp;
-    // Ajout du content
+
     fread(mc->flash + mc->flash_size, 1, lib_size, f);
     mc->flash_size = new_total_size;
 }

@@ -6,9 +6,6 @@
 #include <stdio.h>
 #include "micro_code.h"
 
-// 1. Get header
 void get_lib(FILE *f, Mc *mc);
-// 2. Get linked table
-// 3. Get content
 
 #endif
