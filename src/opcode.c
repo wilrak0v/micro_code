@@ -142,7 +142,10 @@ void execute_movv(Mc *mc)
     int8_t register_number = mc->flash[mc->pc++];
     int32_t value = *(int32_t*)(&mc->flash[mc->pc]);
     mc->pc += 4;
-    mc->regs[register_number] = value;
+    if (register_number == 4) mc->sp = value;
+    else if (register_number == 5) mc-> sp = value;
+    else if (register_number < 4) mc->regs[register_number] = value;
+    else return;
     printf("Register number : %d | Value : %d\n", register_number, value);
     printf("REGS : %d | %d | %d | %d\n", mc->regs[0], mc->regs[1], mc->regs[2], mc->regs[3]);
 }
@@ -190,17 +193,22 @@ void execute_include(Mc *mc)
     }
 }
 
+
 /* Functions functions? hilarant */
 void execute_fn(Mc *mc)
 {
-    // Mettre adresse dans linked table
     int32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
     mc->pc += 4;
     printf("(McFunction) hash: %d ; addr: %d\n", hash, mc->pc);
     push_lt(mc, (McFunction){hash, mc->pc});
-    while(mc->flash[mc->pc] != OP_RET)
-    {
-        printf("%d ; ", mc->flash[mc->pc++]);
-    }
+    while(mc->flash[mc->pc] != OP_RET);
     mc->pc++;
+}
+
+void execute_ret(Mc *mc)
+{
+    int8_t register_number = mc->flash[mc->pc++];
+    if (register_number == 4) mc->pc = mc->sp;
+    else if (register_number < 4) mc->pc = mc->regs[register_number];
+    else return;
 }
