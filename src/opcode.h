@@ -36,5 +36,7 @@ void execute_putc(Mc *mc);
 void execute_include(Mc *mc);
 
 void execute_fn(Mc *mc);
+void execute_ret(Mc *mc);
+void execute_call(Mc *mc);
 
 #endif

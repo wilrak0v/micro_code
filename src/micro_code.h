@@ -42,6 +42,7 @@ typedef enum {
     OP_INCLUDE = 0x16,
     OP_FN      = 0x17,
     OP_RET     = 0x18,
+    OP_CALL    = 0x19,
 } OpCode;
 
 typedef struct {

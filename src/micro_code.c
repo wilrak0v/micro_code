@@ -180,6 +180,14 @@ int execute_mc(Mc *mc)
             execute_fn(mc);
             break;
 
+        case OP_RET:
+            execute_ret(mc);
+            break;
+
+        case OP_CALL:
+            execute_call(mc);
+            break;
+
         default:
             printf("Error: unknow opcode %d at pos %d\n", opcode, mc->pc);
             return 1;
