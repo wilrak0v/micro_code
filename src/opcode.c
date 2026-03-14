@@ -197,7 +197,7 @@ void execute_include(Mc *mc)
 /* Functions functions? hilarant */
 void execute_fn(Mc *mc)
 {
-    int32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
+    uint32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
     mc->pc += 4;
     printf("(McFunction) hash: %d ; addr: %d\n", hash, mc->pc);
     push_lt(mc, (McFunction){hash, mc->pc});
@@ -211,4 +211,26 @@ void execute_ret(Mc *mc)
     if (register_number == 4) mc->pc = mc->sp;
     else if (register_number < 4) mc->pc = mc->regs[register_number];
     else return;
+}
+
+void execute_call(Mc *mc)
+{
+    // CALL hash, R3    => mov pc r3 ; jmp hash.addr
+    uint32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+
+    int8_t register_number = mc->flash[mc->pc++];
+    if(register_number < 4) mc->regs[register_number] = mc->pc;
+    else if (register_number == 4) mc->sp = mc->pc;
+    else return;
+
+    // Jmp hash.addr
+    for (int i = 0; i < mc->lt_size ; i++)
+    {
+        if (mc->linked_table[i].hash == hash)
+        {
+            break;
+            mc->pc = mc->linked_table[i].addr;
+        }
+    }
 }
