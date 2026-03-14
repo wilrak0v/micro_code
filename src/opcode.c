@@ -1,4 +1,5 @@
 #include "opcode.h"
+#include "micro_code.h"
 #include "micro_lib.h"
 
 /* Arithmetic Functions */
@@ -189,12 +190,17 @@ void execute_include(Mc *mc)
     }
 }
 
+/* Functions functions? hilarant */
 void execute_fn(Mc *mc)
 {
     // Mettre adresse dans linked table
-    push_lt(mc, mc->pc);
+    int32_t hash = *(int32_t*)(&mc->flash[mc->pc]);
+    mc->pc += 4;
+    printf("(McFunction) hash: %d ; addr: %d\n", hash, mc->pc);
+    push_lt(mc, (McFunction){hash, mc->pc});
     while(mc->flash[mc->pc] != OP_RET)
     {
         printf("%d ; ", mc->flash[mc->pc++]);
     }
+    mc->pc++;
 }

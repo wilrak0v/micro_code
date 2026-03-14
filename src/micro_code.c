@@ -187,12 +187,12 @@ int execute_mc(Mc *mc)
     return 0;
 }
 
-void push_lt(Mc *mc, uint32_t value)
+void push_lt(Mc *mc, McFunction value)
 {
     if (mc->lt_size == mc->lt_capacity)
     {
         mc->lt_capacity *= 2;
-        mc->linked_table = realloc(mc->linked_table, mc->lt_capacity * sizeof(uint32_t));
+        mc->linked_table = realloc(mc->linked_table, mc->lt_capacity * sizeof(McFunction));
     }
     mc->linked_table[mc->lt_size++] = value;
 }

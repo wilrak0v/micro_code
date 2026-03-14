@@ -45,6 +45,11 @@ typedef enum {
 } OpCode;
 
 typedef struct {
+    uint32_t hash;
+    uint32_t addr;
+} McFunction;
+
+typedef struct {
     uint8_t *flash;
     uint8_t gmode;
     uint16_t pc;
@@ -55,14 +60,14 @@ typedef struct {
     uint16_t lt_capacity;   // linked table capacity
     int32_t *stack;
     int32_t *ram;
-    uint32_t *linked_table;
+    McFunction *linked_table;
     int32_t sp;
     int32_t regs[4];
 } Mc;
 
 int new_mc(Mc *mc, const char *path);
 int execute_mc(Mc *mc);
-void push_lt(Mc *mc, uint32_t value);
+void push_lt(Mc *mc, McFunction value);
 void free_mc(Mc *mc);
 
 #endif
